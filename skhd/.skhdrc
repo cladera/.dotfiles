@@ -35,6 +35,10 @@ alt + shift - e : yabai -m window --toggle split
 # balance size of windows
 shift + alt - 0 : yabai -m space --balance
 
+# Open applications
+cmd + alt - 0x29 : open -a iterm
+cmd + alt - b : open -a "Google Chrome"
+cmd + alt - n : open -a Obsidian
 
 # move window and focus desktop
 shift + alt + ctrl + cmd - 1 : yabai -m window --space 1; yabai -m space --focus 1
