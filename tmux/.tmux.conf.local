@@ -4,6 +4,11 @@
 #         without any warranty.
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
+set-option -g detach-on-destroy off
+
+# tt popup
+bind T display-popup -E "tt"
+
 
 # -- navigation ----------------------------------------------------------------
 
