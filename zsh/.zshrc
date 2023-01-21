@@ -8,6 +8,7 @@ plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "hlissner/zsh-autopair"
 plug "zap-zsh/vim"
+plug "zap-zsh/completions"
 
 # Theme
 plug "zap-zsh/zap-prompt"
@@ -19,8 +20,11 @@ plug "esc/conda-zsh-completion"
 alias tn='tmux new -s $(pwd | sed "s/.*\///g")'
 alias ts='tmux list'
 alias lz="lazygit"
+alias v="lvim"
+alias zz='cd $(zoxide query -l | fzf --reverse)'
 
 autoload -U +X bashcompinit && bashcompinit
+
 complete -o nospace -C /usr/local/bin/terraform terraform
 
 # Local 
