@@ -8,20 +8,18 @@ plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "hlissner/zsh-autopair"
 plug "zap-zsh/vim"
-plug "zap-zsh/completions"
 
 # Theme
 plug "zap-zsh/zap-prompt"
 
 # Completion
-plug "esc/conda-zsh-completion"
+plug "zap-zsh/completions"
 
 # Aliases
-alias tn='tmux new -s $(pwd | sed "s/.*\///g")'
-alias ts='tmux list'
 alias lz="lazygit"
+alias lg="lazygit"
 alias v="lvim"
-alias zz='cd $(zoxide query -l | fzf --reverse)'
+# alias zz='cd $(zoxide query -l | fzf --reverse)'
 
 autoload -U +X bashcompinit && bashcompinit
 
@@ -39,8 +37,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Pyenv
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 
 # Zoxide
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh)"
 
+. "$HOME/.asdf/asdf.sh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
