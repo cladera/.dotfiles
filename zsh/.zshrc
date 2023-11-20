@@ -1,6 +1,7 @@
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 
 export PATH=$HOME/.config/bin:$PATH
+export PATH=$PATH:/opt/homebrew/bin
 
 # Plugins
 plug "zap-zsh/supercharge"
