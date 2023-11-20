@@ -19,8 +19,7 @@ plug "zap-zsh/completions"
 # Aliases
 alias lz="lazygit"
 alias lg="lazygit"
-alias v="lvim"
-# alias zz='cd $(zoxide query -l | fzf --reverse)'
+alias v="lvim --listen /tmp/nvim-server.pipe"
 
 autoload -U +X bashcompinit && bashcompinit
 
@@ -28,6 +27,19 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 
 # Local 
 [ -f "$HOME/.local/.zshrc" ] && source "$HOME/.local/.zshrc"
+
+# NVIM-REMOTE
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+    alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
+fi
+
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+    export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+else
+    export VISUAL="lvim"
+    export EDITOR="lvim"
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
