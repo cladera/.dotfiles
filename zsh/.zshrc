@@ -20,6 +20,8 @@ plug "zap-zsh/completions"
 alias lz="lazygit"
 alias lg="lazygit"
 alias v="lvim --listen /tmp/nvim-server.pipe"
+alias zz='cd $(zoxide query -l | fzf --reverse)'
+alias f='cd $(zoxide query -l | fzf --reverse)'
 
 autoload -U +X bashcompinit && bashcompinit
 
@@ -53,7 +55,7 @@ export NVM_DIR="$HOME/.nvm"
 # eval "$(pyenv init -)"
 
 # Zoxide
-# eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh)"
 
 . "$HOME/.asdf/asdf.sh"
 
