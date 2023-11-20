@@ -25,7 +25,7 @@ alias f='cd $(zoxide query -l | fzf --reverse)'
 
 autoload -U +X bashcompinit && bashcompinit
 
-complete -o nospace -C /usr/local/bin/terraform terraform
+# complete -o nospace -C /usr/local/bin/terraform terraform
 
 # Local 
 [ -f "$HOME/.local/.zshrc" ] && source "$HOME/.local/.zshrc"
