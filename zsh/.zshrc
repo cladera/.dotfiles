@@ -33,11 +33,9 @@ autoload -U +X bashcompinit && bashcompinit
 # NVIM-REMOTE
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
     alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
-fi
-
-if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
     export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
     export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    export GIT_EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
 else
     export VISUAL="lvim"
     export EDITOR="lvim"
@@ -57,6 +55,9 @@ export NVM_DIR="$HOME/.nvm"
 # Zoxide
 eval "$(zoxide init zsh)"
 
-. "$HOME/.asdf/asdf.sh"
+# . "$HOME/.asdf/asdf.sh"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
