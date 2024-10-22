@@ -11,5 +11,6 @@ map('n', '<leader>e', '<CMD>Oil<CR>')
 
 -- Buffers
 map('i', 'jk', '<Esc>')
+map('i', 'jj', '<Esc>')
+map('i', 'kk', '<Esc>')
 map('n', '<leader>w', '<CMD>w<CR>') 
-
