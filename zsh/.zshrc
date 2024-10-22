@@ -59,5 +59,3 @@ eval "$(zoxide init zsh)"
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
