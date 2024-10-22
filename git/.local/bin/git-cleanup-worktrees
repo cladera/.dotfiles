@@ -1,0 +1,53 @@
+#!/bin/bash
+
+working_directory=$(pwd)
+main_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+main_worktree_path=""
+
+# Get the path to the main Git rerepository
+find_main_worktree_path() {
+  local main_branch=$1
+  git worktree list | while read line; do
+    local worktree_path=$(echo $line | awk '{print $1}')
+    local worktree_branch=$(echo $line | sed 's/.*\[\(.*\)\].*/\1/')
+
+    if [ "$worktree_branch" = "$main_branch" ]; then
+      echo "$worktree_path"
+    fi
+  done
+}
+
+main_worktree_path=$(find_main_worktree_path $main_branch)
+
+if [ "$working_directory" != "$main_worktree_path" ]; then
+  echo "This script must be executed from within the main repository worktree ($main_worktree_path)"
+ exit 1
+fi
+
+echo "MAIN BRANCH: $main_branch"
+
+# List all worktrees and iterate through them
+git worktree list | while read line; do
+  worktree_path=$(echo $line | awk '{print $1}')
+  worktree_branch=$(echo $line | sed 's/.*\[\(.*\)\].*/\1/')
+
+  echo "Checking whether $worktree_branch has an active remote branch"
+
+  # Skip if the worktree is the main branch
+  if [ "$worktree_branch" = "$main_branch" ]; then
+    echo "Skipping branch $worktree_branch"
+    continue
+  fi
+
+  if ! git ls-remote --heads origin | grep -q "$worktree_branch\$"; then
+    echo "Removing worktree for branch $worktree_branch with no associated remote branch"
+
+    # Remove the worktree
+    git worktree remove "$worktree_path" --force
+  else 
+    echo "Remote branch exists for $worktree_branch; keeping the worktree"
+  fi
+
+done
+
+echo "Worktree cleanup complete."
