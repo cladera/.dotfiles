@@ -13,19 +13,29 @@ return {
     },
     event = "User FileOpened",
   },
+-- LSP
   {
-    "williamboman/mason.nvim",
+	  "neovim/nvim-lspconfig",
+	  event = { "BufReadPre", "BufNewFile" },
+	  dependencies = {
+	    {
+	      "folke/neodev.nvim",
+	    },
+	  },
+	  config = function()
+		  require("config.lsp").setup()
+	  end
+  },
+-- Mason
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+    	{
+		"williamboman/mason.nvim",
+	},
+    },
     config = function()
 	    require('config.mason').setup()
     end,
-    cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-    build = function()
-      pcall(function()
-        require("mason-registry").refresh()
-      end)
-    end,
-    event = "User FileOpened",
-    lazy = true,
   },
-
 }

@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup()
 	local mason_ok, mason = pcall(require, "mason")
+	local mason_lsp_config_ok, mason_lsp_config = pcall(requre, "mason-lspconfig")
 	if not mason_ok then
 		return
 	end
@@ -32,6 +33,20 @@ function M.setup()
 	    },
 	})
 
+	if not mason_lsp_config_ok then
+		return
+	end
+
+	mason_lsp_config.setup({
+		ensure_installed = {
+		    "lua_ls",
+		    "cssls",
+		    "html",
+		    "tsserver",
+		    "bashls",
+		    "jsonls",
+		}
+	})
 end
 
 return M
