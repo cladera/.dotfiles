@@ -1,11 +1,17 @@
-local tsc_ok, tsc = pcall(require, "nvim-treesitter.configs")
+local M = {}
 
-if not tsc_ok then
-  return
+function M.setup()
+	local tsc_ok, tsc = pcall(require, "nvim-treesitter.configs")
+
+	if not tsc_ok then
+		return
+	end
+
+	tsc.setup({
+		ensure_installed = { "comment", "lua", "markdown", "markdown_inline" },
+		highlight = { enable = true },
+		indent = { enable = true },
+	})
 end
 
-tsc.setup({
-	ensure_installed = {"comment", "lua", "markdown", "markdown_inline"},
-	sync_install = false,
-	auto_install = true,
-})
+return M
