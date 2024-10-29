@@ -1,16 +1,16 @@
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap=true, silent=true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+local k = require("util.keymapping")
 
 -- Navigation
-map('n', '<leader>e', '<CMD>Oil<CR>')
+k.map('n', '<leader>e', k.cmd('Oil'))
 
 -- Buffers
-map('i', 'jk', '<Esc>')
-map('i', 'jj', '<Esc>')
-map('i', 'kk', '<Esc>')
-map('n', '<leader>w', '<CMD>w<CR>') 
+k.map('i', 'jk', '<Esc>')
+k.map('i', 'jj', '<Esc>')
+k.map('i', 'kk', '<Esc>')
+k.map('n', '<leader>w', '<CMD>w<CR>')
+
+-- Windows
+k.map('n', '<C-l>', '<C-w>l')
+k.map('n', '<C-h>', '<C-w>h')
+k.map('n', '<C-k>', '<C-w>k')
+k.map('n', '<C-j>', '<C-w>j')

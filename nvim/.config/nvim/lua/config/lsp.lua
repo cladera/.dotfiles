@@ -26,7 +26,6 @@ M.on_attach = function(client, bufnr)
 end
 
 M.setup = function()
-	print('Setting LSP up')
 	local lspconfig_ok, lspconfig = pcall(require, 'lspconfig')
 	local icons = require('config.icons')
 	if not lspconfig_ok then
