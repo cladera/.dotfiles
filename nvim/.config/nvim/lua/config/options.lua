@@ -17,3 +17,4 @@ vim.opt.wrap = false -- display lines as one long line
 vim.opt.scrolloff = 0
 vim.opt.sidescrolloff = 8
 
+vim.opt.updatetime = 100 -- faster completion (4000ms default)
