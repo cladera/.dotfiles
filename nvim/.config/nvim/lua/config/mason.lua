@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
 	local mason_ok, mason = pcall(require, "mason")
-	local mason_lsp_config_ok, mason_lsp_config = pcall(requre, "mason-lspconfig")
+	local mason_lsp_config_ok, mason_lsp_config = pcall(require, "mason-lspconfig")
 	if not mason_ok then
 		return
 	end
@@ -42,7 +42,7 @@ function M.setup()
 			"lua_ls",
 			"cssls",
 			"html",
-			"tsserver",
+			"ts_ls",
 			"bashls",
 			"jsonls",
 		},

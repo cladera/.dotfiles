@@ -47,7 +47,7 @@ M.setup = function()
 		"lua_ls",
 		"cssls",
 		"html",
-		"tsserver",
+		"ts_ls",
 		"eslint",
 		"bashls",
 		"jsonls",
@@ -96,7 +96,6 @@ M.setup = function()
 		}
 
 		local require_ok, settings = pcall(require, "lspsettings." .. server)
-		print(server)
 		if require_ok then
 			opts = vim.tbl_deep_extend("force", settings, opts)
 		end
