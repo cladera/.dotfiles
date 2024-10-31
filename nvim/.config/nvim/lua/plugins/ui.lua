@@ -21,4 +21,12 @@ return {
 			require("breadcrumbs").setup()
 		end,
 	},
+	-- Homescreen
+	{
+		"goolord/alpha-nvim",
+		event = "VimEnter",
+    config = function ()
+      require("config.alpha").setup();
+    end
+	},
 }
