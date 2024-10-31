@@ -28,6 +28,8 @@ function M.setup()
 	}
 
 	which_key.setup({
+		notify = false,
+		spec = mappings,
 		plugins = {
 			marks = true,
 			registers = true,
@@ -45,12 +47,11 @@ function M.setup()
 				g = false,
 			},
 		},
-		window = {
+		win = {
 			border = "rounded",
-			position = "bottom",
 			padding = { 2, 2, 2, 2 },
+			title = true,
 		},
-		ignore_missing = true,
 		show_help = false,
 		show_keys = false,
 		disable = {
@@ -63,7 +64,6 @@ function M.setup()
 		mode = "n",
 		prefix = "<leader>",
 	}
-	which_key.add(mappings, opts)
 end
 
 return M
