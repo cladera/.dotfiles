@@ -29,6 +29,7 @@ return {
 			require("config.lsp").setup()
 		end,
 	},
+  { "mfussenegger/nvim-jdtls" },
 	-- Mason
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -96,4 +97,5 @@ return {
 			require("config.null-ls").setup()
 		end,
 	},
+
 }
