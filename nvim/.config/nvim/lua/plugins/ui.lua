@@ -25,8 +25,15 @@ return {
 	{
 		"goolord/alpha-nvim",
 		event = "VimEnter",
-    config = function ()
-      require("config.alpha").setup();
-    end
+		config = function()
+			require("config.alpha").setup()
+		end,
+	},
+	-- Bottom line
+	{
+		"nvim-lualine/lualine.nvim",
+		config = function()
+			require("config.lualine").setup()
+		end,
 	},
 }

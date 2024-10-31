@@ -1,3 +1,4 @@
+vim.opt.cmdheight = 1
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.colorcolumn = "100"
