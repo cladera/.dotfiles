@@ -2,6 +2,18 @@ local k = require("util.keymapping")
 
 local M = {}
 
+local servers = {
+	"lua_ls",
+	"cssls",
+	"html",
+	"ts_ls",
+	"eslint",
+	"bashls",
+	"jsonls",
+	"angularls",
+  "tailwindcss"
+}
+
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
 	local keymap = vim.api.nvim_buf_set_keymap
@@ -43,15 +55,6 @@ M.setup = function()
 	if not lspconfig_ok then
 		return
 	end
-	local servers = {
-		"lua_ls",
-		"cssls",
-		"html",
-		"ts_ls",
-		"eslint",
-		"bashls",
-		"jsonls",
-	}
 
 	local default_diagnostic_config = {
 		signs = {

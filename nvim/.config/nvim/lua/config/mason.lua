@@ -45,6 +45,7 @@ function M.setup()
 			"ts_ls",
 			"bashls",
 			"jsonls",
+      "angularls"
 		},
 	})
 end
