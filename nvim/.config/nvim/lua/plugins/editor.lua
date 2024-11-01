@@ -15,8 +15,15 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-    config = function ()
-      require("config.lazygit").setup()
+		config = function()
+			require("config.lazygit").setup()
+		end,
+	},
+	{
+		"codota/tabnine-nvim",
+		build = "./dl_binaries.sh",
+    config = function()
+      require('config.tabnine').setup()
     end
 	},
 }
