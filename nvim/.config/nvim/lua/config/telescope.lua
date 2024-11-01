@@ -122,8 +122,21 @@ function M.setup()
 				override_file_sorter = true, -- override the file sorter
 				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 			},
+			["ui-select"] = {
+				winblend = 15,
+				layout_config = {
+					prompt_position = "top",
+					width = 80,
+					height = 12,
+				},
+				border = {},
+				previewer = false,
+				shorten_path = false,
+			},
 		},
 	})
+
+	telescope.load_extension("ui-select")
 end
 
 return M

@@ -12,8 +12,11 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true } },
-    config = function ()
-      require("config.telescope").setup()
-    end
+		config = function()
+			require("config.telescope").setup()
+		end,
+	},
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
 	},
 }
