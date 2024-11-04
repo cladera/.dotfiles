@@ -155,4 +155,14 @@ return {
 		Package = " ",
 		CircuitBoard = " ",
 	},
+	debug = {
+		Pause = " ",
+		Play = " ",
+		StepInto = " ",
+		StepOver = " ",
+		StepOut = " ",
+		StepBack = " ",
+		RunLast = " ",
+		Terminate = " ",
+	},
 }

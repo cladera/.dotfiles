@@ -11,7 +11,7 @@ return {
 			"TSInstallSync",
 			"TSInstallFromGrammar",
 		},
-		event = "User FileOpened",
+		event = "BufRead",
 		config = function()
 			require("config.treesitter").setup()
 		end,

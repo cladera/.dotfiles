@@ -56,9 +56,12 @@ local function java_mappings()
 		wk.add({ "<leader>j", group = "Java", mode = "v" })
 	end
 
-	k.map("n", "<leader>jo", k.cmd("lua require'jdtls'.organize_imports()"), { desc = "Organize Imports" })
 	k.map("n", "<leader>lo", k.cmd("lua require'jdtls'.organize_imports()"), { desc = "Organize Imports" })
-	k.map("n", "<leader>jb", k.cmd("JdtCompile"), { desc = "Organize Imports" })
+
+	k.map("n", "<leader>jo", k.cmd("lua require'jdtls'.organize_imports()"), { desc = "Organize Imports" })
+	k.map("n", "<leader>jb", k.cmd("JdtCompile"), { desc = "Compile" })
+	k.map("n", "<leader>jT", k.cmd("lua require('jdtls').test_class()"), { desc = "Test class" })
+	k.map("n", "<leader>jt", k.cmd("lua require('jdtls').test_nearest_method()"), { desc = "Test method" })
 
 	k.map("v", "<leader>jv", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", { desc = "Extract Variable" })
 	k.map("v", "<leader>jc", "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", { desc = "Extract Constant" })
@@ -213,8 +216,8 @@ local config = {
 config["on_attach"] = function(client, bufnr)
 	local _, _ = pcall(vim.lsp.codelens.refresh)
 	-- require("jdtls.setup").add_commands()
-	-- require("jdtls.dap").setup_dap_main_class_configs()
-	-- require("jdtls").setup_dap({ hotcodereplace = "auto" })
+	require("jdtls").setup_dap({ hotcodereplace = "auto" })
+	require("jdtls.dap").setup_dap_main_class_configs()
 	require("config.lsp").on_attach(client, bufnr)
 	java_mappings()
 end

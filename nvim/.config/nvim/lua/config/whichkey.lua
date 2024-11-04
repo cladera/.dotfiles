@@ -18,6 +18,7 @@ function M.setup()
 		{ "<leader>l", group = "LSP" },
 		{ "<leader>p", group = "Plugins" },
 		-- {"<leader>t", group = "Test" },
+		{"<leader>d", group = "Debug" },
 		{ "<leader>a", group = "Tab" },
 		{ "<leader>an", "<cmd>$tabnew<cr>", desc = "New Empty Tab" },
 		{ "<leader>aN", "<cmd>tabnew %<cr>", desc = "New Tab" },

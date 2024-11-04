@@ -8,7 +8,13 @@ function M.setup()
 	end
 
 	tsc.setup({
-		ensure_installed = { "comment", "lua", "markdown", "markdown_inline" },
+		ensure_installed = {
+			"comment",
+			"lua",
+			"markdown",
+			"markdown_inline",
+			"typescript",
+		},
 		highlight = { enable = true },
 		indent = { enable = true },
 	})
