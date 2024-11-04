@@ -19,4 +19,14 @@ return {
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 	},
+	{
+		"ThePrimeagen/harpoon",
+		event = "VeryLazy",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+		},
+    config = function()
+      require("config.harpoon").setup()
+    end
+	},
 }
