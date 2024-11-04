@@ -19,13 +19,12 @@ function M.setup()
 		{ "<leader>p", group = "Plugins" },
 		-- {"<leader>t", group = "Test" },
 		{"<leader>d", group = "Debug" },
-		{ "<leader>a", group = "Tab" },
-		{ "<leader>an", "<cmd>$tabnew<cr>", desc = "New Empty Tab" },
-		{ "<leader>aN", "<cmd>tabnew %<cr>", desc = "New Tab" },
-		{ "<leader>ao", "<cmd>tabonly<cr>", desc = "Only" },
-		{ "<leader>ah", "<cmd>-tabmove<cr>", desc = "Move Left" },
-		{ "<leader>al", "<cmd>+tabmove<cr>", desc = "Move Right" },
-		{ "<leader>T", group = "Treesitter" },
+		{ "<leader>t", group = "Tab" },
+		{ "<leader>tn", "<cmd>$tabnew<cr>", desc = "New Empty Tab" },
+		{ "<leader>tN", "<cmd>tabnew %<cr>", desc = "New Tab" },
+		{ "<leader>to", "<cmd>tabonly<cr>", desc = "Close Other Tabs" },
+		{ "<leader>th", "<cmd>-tabmove<cr>", desc = "Move Left" },
+		{ "<leader>tl", "<cmd>+tabmove<cr>", desc = "Move Right" },
 	}
 
 	which_key.setup({
