@@ -22,8 +22,14 @@ return {
 	{
 		"codota/tabnine-nvim",
 		build = "./dl_binaries.sh",
-    config = function()
-      require('config.tabnine').setup()
-    end
+		config = function()
+			require("config.tabnine").setup()
+		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		event = "VimEnter",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = { signs = false },
 	},
 }
