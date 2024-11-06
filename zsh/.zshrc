@@ -19,7 +19,7 @@ plug "zap-zsh/completions"
 # Aliases
 alias lz="lazygit"
 alias lg="lazygit"
-alias v="lvim --listen /tmp/nvim-server.pipe"
+alias v="nvim --listen /tmp/nvim-server.pipe"
 alias zz='cd $(zoxide query -l | fzf --reverse)'
 alias f='cd $(zoxide query -l | fzf --reverse)'
 
