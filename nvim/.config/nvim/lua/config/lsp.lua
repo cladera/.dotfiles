@@ -11,7 +11,9 @@ local servers = {
 	"bashls",
 	"jsonls",
 	"angularls",
-  "tailwindcss"
+	"tailwindcss",
+	"terraformls",
+	"gopls",
 }
 
 local function lsp_keymaps(bufnr)
@@ -41,6 +43,7 @@ end
 
 M.setup = function()
 	k.map("n", "<leader>la", k.cmd("lua vim.lsp.buf.code_action()"), { desc = "Code Action" })
+	k.map("n", "<leader>lr", k.cmd("lua vim.lsp.buf.rename()"), { desc = "Rename" })
 	k.map(
 		"n",
 		"<leader>lf",
