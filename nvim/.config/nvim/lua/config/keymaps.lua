@@ -15,6 +15,10 @@ k.map("n", "<C-l>", "<C-w>l", opts)
 k.map("n", "<C-h>", "<C-w>h", opts)
 k.map("n", "<C-k>", "<C-w>k", opts)
 k.map("n", "<C-j>", "<C-w>j", opts)
+k.map("n", "<M-Left>", k.cmd("vertical resize-2"), opts)
+k.map("n", "<M-Right>", k.cmd("vertical resize+2"), opts)
+k.map("n", "<M-Up>", k.cmd("horizontal resize-2"), opts)
+k.map("n", "<M-Down>", k.cmd("horizontal resize+2"), opts)
 
 -- Tabs
 k.map("n", "<C-M-l>", k.cmd("+tabnext"), {desc = "Next Tab"})
