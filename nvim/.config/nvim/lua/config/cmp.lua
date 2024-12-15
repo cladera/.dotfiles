@@ -21,15 +21,23 @@ function M.setup()
 
 	local icons = require("config.icons")
 	local sources = {
-		{ name = "copilot" },
-		{ name = "nvim_lsp" },
+		{
+			name = "nvim_lsp",
+			priority = 1000,
+			entry_filter = function(entry, ctx)
+				local kind = entry:get_kind()
+				-- Filter out Text suggestions (often used for spelling)
+				return kind ~= cmp.lsp.CompletionItemKind.Text
+			end,
+		},
+		-- { name = "copilot" },
 		{ name = "luasnip" },
 		{ name = "cmp_tabnine" },
 		{ name = "nvim_lua" },
-		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "calc" },
 		{ name = "emoji" },
+		{ name = "buffer" },
 	}
 	local config = {
 		snippet = {
@@ -53,7 +61,7 @@ function M.setup()
 			}),
 			-- Accept currently selected item. If none selected, `select` first item.
 			-- Set `select` to `false` to only confirm explicitly selected items.
-			["<CR>"] = cmp.mapping.confirm({ select = true }),
+			["<CR>"] = cmp.mapping.confirm({ select = false }),
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
@@ -104,6 +112,11 @@ function M.setup()
 				if entry.source.name == "cmp_tabnine" then
 					vim_item.kind = icons.misc.Robot
 					vim_item.kind_hl_group = "CmpItemKindTabnine"
+				end
+
+				if entry.source.name == "buffer" then
+					vim_item.kind = icons.kind.File
+					vim_item.kind_hl_group = "CmpItemKindBuffer"
 				end
 
 				return vim_item
