@@ -14,6 +14,8 @@ local servers = {
 	"tailwindcss",
 	"terraformls",
 	"gopls",
+	"kotlin_language_server",
+	"terraformls",
 }
 
 local function lsp_keymaps(bufnr)
@@ -96,21 +98,39 @@ M.setup = function()
 	require("lspconfig.ui.windows").default_options.border = "rounded"
 
 	for _, server in pairs(servers) do
+		print(server .. "server detected")
+
 		local opts = {
 			on_attach = M.on_attach,
 			capabilities = M.common_capabilities(),
 		}
 
 		local require_ok, settings = pcall(require, "lspsettings." .. server)
-		if require_ok then
-			opts = vim.tbl_deep_extend("force", settings, opts)
+		if not require_ok then
+      print(vim.inspect(settings))
+			print("no custom settings found")
+			settings = {
+				lsp_enabled = true,
+				lsp_opts = {},
+			}
 		end
 
-		if server == "lua_ls" then
-			require("neodev").setup({})
+		if settings.lsp_opts == nil then
+			print(server .. "'s custom opts are in the root of the config, normalizing is required")
+			settings.lsp_opts = vim.tbl_deep_extend("force", {}, settings)
+			settings.lsp_enabled = true
 		end
 
-		lspconfig[server].setup(opts)
+		if settings.lsp_enabled then
+			print(server .. "server is enabled, applying custom configuration")
+			opts = vim.tbl_deep_extend("force", settings.lsp_opts, opts)
+			if server == "lua_ls" then
+				require("neodev").setup({})
+			end
+			lspconfig[server].setup(opts)
+		else
+			print(server .. "server is disabled")
+		end
 	end
 end
 return M
