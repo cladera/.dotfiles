@@ -8,15 +8,13 @@ function M.setup()
 		return
 	end
 
-	k.map("n", "<leader>bb", "<cmd>Telescope buffers previewer=false<cr>", { desc = "Find" })
-	k.map("n", "<leader>fb", "<cmd>Telescope git_branches<cr>", { desc = "Checkout branch" })
-	k.map("n", "<leader>fc", "<cmd>Telescope colorscheme<cr>", { desc = "Colorscheme" })
-	k.map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
-	-- k.map("n", "<leader>fp", "<cmd>lua require('telescope').extensions.projects.projects()<cr>", { desc = "Projects" })
-	k.map("n", "<leader>ft", "<cmd>Telescope live_grep<cr>", { desc = "Find Text" })
-	k.map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help" })
-	k.map("n", "<leader>fl", "<cmd>Telescope resume<cr>", { desc = "Last Search" })
-	k.map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent File" })
+	k.map("n", "<leader>bb", k.cmd("Telescope buffers previewer=false"), { desc = "Find" })
+	k.map("n", "<leader>fb", k.cmd("Telescope git_branches"), { desc = "Checkout branch" })
+	k.map("n", "<leader>ff", k.cmd("Telescope find_files"), { desc = "Find files" })
+	k.map("n", "<leader>ft", k.cmd("Telescope live_grep"), { desc = "Find Text" })
+	k.map("n", "<leader>fh", k.cmd("Telescope help_tags"), { desc = "Help" })
+	k.map("n", "<leader>fl", k.cmd("Telescope resume"), { desc = "Last Search" })
+	k.map("n", "<leader>fr", k.cmd("Telescope oldfiles"), { desc = "Recent File" })
 
 	local icons = require("config.icons")
 	local actions = require("telescope.actions")
