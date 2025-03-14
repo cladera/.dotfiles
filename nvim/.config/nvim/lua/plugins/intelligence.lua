@@ -29,7 +29,7 @@ return {
 			require("config.lsp").setup()
 		end,
 	},
-  { "mfussenegger/nvim-jdtls" },
+	{ "mfussenegger/nvim-jdtls" },
 	-- Mason
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -82,6 +82,7 @@ return {
 				"hrsh7th/cmp-nvim-lua",
 			},
 		},
+		-- config = true,
 		config = function()
 			require("config.cmp").setup()
 		end,
@@ -98,4 +99,29 @@ return {
 		end,
 	},
 
+	-- AI
+	{
+		"github/copilot.vim",
+		config = function()
+			require("config.copilot").setup()
+		end,
+	},
+	-- {
+	-- 	"codota/tabnine-nvim",
+	-- 	build = "./dl_binaries.sh",
+	-- 	config = function()
+	-- 		require("config.tabnine").setup()
+	-- 	end,
+	-- },
+	{
+		"olimorris/codecompanion.nvim",
+		config = function()
+			require("config.codecompanion").setup()
+		end,
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-treesitter/nvim-treesitter" },
+			{ "hrsh7th/nvim-cmp" },
+		},
+	},
 }
