@@ -32,7 +32,7 @@ function M.setup()
 		},
 		-- { name = "copilot" },
 		{ name = "luasnip" },
-		{ name = "cmp_tabnine" },
+		-- { name = "cmp_tabnine" },
 		{ name = "nvim_lua" },
 		{ name = "path" },
 		{ name = "calc" },
