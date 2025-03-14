@@ -20,19 +20,6 @@ return {
 		end,
 	},
 	{
-		"github/copilot.vim",
-		config = function()
-			require("config.copilot").setup()
-		end,
-	},
-	-- {
-	-- 	"codota/tabnine-nvim",
-	-- 	build = "./dl_binaries.sh",
-	-- 	config = function()
-	-- 		require("config.tabnine").setup()
-	-- 	end,
-	-- },
-	{
 		"folke/todo-comments.nvim",
 		event = "VimEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
