@@ -1,6 +1,18 @@
+local json = require("../../util/json")
+
 local M = {}
 
 local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
+
+local function is_nx_repo()
+	return vim.fn.findfile("nx.json", ".;"):len() > 0
+end
+
+local function is_repo(repo)
+	local pckg = json.parse_file(vim.fn.getcwd() .. "/package.json")
+
+	return pckg ~= nil and pckg.name == repo
+end
 
 local function get_test_at_cursor()
 	local grep = nil
@@ -94,25 +106,27 @@ local function ask_port()
 end
 
 function M.setup()
-	local dap_vscode_js_ok, dap_vscode_js = pcall(require, "dap-vscode-js")
-	if not dap_vscode_js_ok then
+	local dap_ok, dap = pcall(require, "dap")
+	if not dap_ok then
 		return
 	end
 
-	dap_vscode_js.setup({
-		debugger_path = mason_path .. "packages/js-debug-adapter/", -- Path to vscode-js-debug installation.
-		adapters = {
-			"pwa-node",
-			"pwa-chrome",
-			"pwa-msedge",
-			"node-terminal",
-			"pwa-extensionHost",
+	local debugger_path = mason_path .. "packages/js-debug-adapter/"
+	dap.adapters["pwa-node"] = {
+		type = "server",
+		host = "localhost",
+		port = "${port}",
+		executable = {
+			command = "node",
+			args = { debugger_path .. "js-debug/src/dapDebugServer.js", "${port}" },
 		},
-	})
+	}
 
 	for _, language in ipairs({ "typescript", "javascript", "typescriptreact" }) do
-		require("dap").configurations[language] = {
-			{
+		local configs = {}
+
+		if is_nx_repo() then
+			table.insert(configs, {
 				type = "pwa-node",
 				request = "launch",
 				name = "NX: test",
@@ -122,8 +136,9 @@ function M.setup()
 				cwd = "${workspaceFolder}",
 				console = "integratedTerminal",
 				internalConsoleOptions = "neverOpen",
-			},
-			{
+			})
+
+			table.insert(configs, {
 				type = "pwa-node",
 				request = "launch",
 				name = "NX: test all",
@@ -133,15 +148,19 @@ function M.setup()
 				cwd = "${workspaceFolder}",
 				console = "integratedTerminal",
 				internalConsoleOptions = "neverOpen",
-			},
-			{
+			})
+
+			table.insert(configs, {
 				type = "pwa-node",
 				request = "attach",
 				name = "Node.js Attach (9229)",
 				autoAttachChildProcesses = true,
 				port = 9229,
 				cwd = "${workspaceFolder}",
-			},
+			})
+		end
+
+		require("dap").configurations[language] = {
 			{
 				type = "pwa-node",
 				request = "attach",
