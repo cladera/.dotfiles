@@ -7,7 +7,7 @@ local components = {
 			return " " .. icons.ui.Code .. " "
 		end,
 		padding = { left = 0, right = 0 },
-		separator = { left = "◖" },
+		separator = { left = "" },
 		color = {},
 		cond = nil,
 	},
@@ -24,7 +24,7 @@ local components = {
 		function()
 			local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
 			if #buf_clients == 0 then
-				return "LSP Inactive"
+				return icons.kind.File
 			end
 
 			local buf_client_names = {}
@@ -32,11 +32,13 @@ local components = {
 
 			-- add client
 			for _, client in pairs(buf_clients) do
-				if client.name ~= "null-ls" and client.name ~= "copilot" then
+				if icons.lsp[client.name] then
+					table.insert(buf_client_names, icons.lsp[client.name])
+				elseif client.name ~= "null-ls" and client.name ~= "GitHub Copilot" then
 					table.insert(buf_client_names, client.name)
 				end
 
-				if client.name == "copilot" then
+				if client.name == "GitHub Copilot" then
 					copilot_active = true
 				end
 			end
@@ -45,7 +47,7 @@ local components = {
 			local language_servers = string.format("[%s]", unique_client_names)
 
 			if copilot_active then
-				language_servers = language_servers .. "%#SLCopilot#" .. " " .. icons.git.Octoface .. "%*"
+				language_servers = language_servers .. "%#SLCopilot#" .. " " .. icons.misc.Copilot .. "%*"
 			end
 
 			return language_servers
@@ -63,7 +65,7 @@ function M.setup()
 	lualine.setup({
 		options = {
 			component_separators = "|",
-			section_separators = { right = "◖", left = "" },
+			section_separators = { right = "", left = "" },
 			ignore_focus = { "NvimTree" },
 		},
 		sections = {
@@ -71,7 +73,7 @@ function M.setup()
 				components.mode,
 			},
 			lualine_b = { "branch" },
-			lualine_c = { "filename" },
+			lualine_c = { { "filename", path = 1, icon = icons.kind.Folder } },
 			lualine_x = {
 				"diagnostis",
 				components.lsp,
