@@ -160,16 +160,17 @@ function M.setup()
 			})
 		end
 
-		require("dap").configurations[language] = {
-			{
-				type = "pwa-node",
-				request = "attach",
-				name = "Node.js Attach",
-				autoAttachChildProcesses = true,
-				port = ask_port,
-				cwd = "${workspaceFolder}",
-			},
-		}
+    -- Common --
+    table.insert(configs, {
+      type = "pwa-node",
+      request = "attach",
+      name = "Node.js Attach",
+      autoAttachChildProcesses = true,
+      port = ask_port,
+      cwd = "${workspaceFolder}",
+    })
+
+		require("dap").configurations[language] = configs
 	end
 end
 
