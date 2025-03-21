@@ -1,6 +1,5 @@
 local M = {}
 
-
 function M.setup()
 	local ok, codecompanion = pcall(require, "codecompanion")
 	if not ok then
@@ -16,6 +15,16 @@ function M.setup()
 				adapter = "copilot",
 			},
 		},
+    display = {
+      chat = {
+				window = {
+					width = 0.33,
+				},
+      },
+      diff = {
+        enabled = false,
+      }
+    }
 	})
 end
 
