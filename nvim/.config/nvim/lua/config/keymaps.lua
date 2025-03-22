@@ -37,3 +37,7 @@ k.map("n", "g#", "g#zz")
 -- Stay in indent mode
 k.map("v", "<", "<gv")
 k.map("v", ">", ">gv")
+
+-- Yank to system clipboard
+k.map("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+
