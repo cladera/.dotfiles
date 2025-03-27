@@ -8,8 +8,8 @@ k.map("i", "jk", "<Esc>")
 k.map("i", "jj", "<Esc>")
 k.map("i", "kk", "<Esc>")
 k.map("n", "<leader>w", k.cmd("w"))
-k.map("n", "<leader>wy", k.cmd('let @" = expand("%")'), { desc = "Yank buffer filepath" })
-k.map("n", "<leader>wY", k.cmd('let @* = expand("%")'), { desc = "Yank buffer filepath (clipboard)" })
+k.map("n", "<leader>by", k.cmd('let @" = expand("%")'), { desc = "Yank buffer filepath" })
+k.map("n", "<leader>bY", k.cmd('let @* = expand("%")'), { desc = "Yank buffer filepath (clipboard)" })
 
 -- Windows
 k.map("n", "<C-l>", "<C-w>l")
@@ -37,3 +37,7 @@ k.map("n", "g#", "g#zz")
 -- Stay in indent mode
 k.map("v", "<", "<gv")
 k.map("v", ">", ">gv")
+
+-- Yank to system clipboard
+k.map("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+

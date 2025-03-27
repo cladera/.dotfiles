@@ -33,6 +33,7 @@ return {
 		---@module 'render-markdown'
 		---@type render.md.UserConfig
 		opts = {},
+		ft = { "markdown", "codecompanion" },
 	},
 	{
 		"iamcco/markdown-preview.nvim",
@@ -41,6 +42,6 @@ return {
 		init = function()
 			vim.g.mkdp_filetypes = { "markdown" }
 		end,
-		ft = { "markdown" },
+		ft = { "markdown", "codecompanion" },
 	},
 }

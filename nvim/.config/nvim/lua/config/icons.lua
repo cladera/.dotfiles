@@ -154,6 +154,7 @@ return {
 		Smiley = " ",
 		Package = " ",
 		CircuitBoard = " ",
+    Copilot = " "
 	},
 	debug = {
 		Pause = " ",
@@ -165,4 +166,9 @@ return {
 		RunLast = " ",
 		Terminate = " ",
 	},
+  lsp = {
+    lua_ls = "",
+    ts_ls = "",
+    jdtls = ""
+  }
 }

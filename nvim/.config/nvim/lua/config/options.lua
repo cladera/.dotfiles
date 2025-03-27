@@ -19,3 +19,8 @@ vim.opt.scrolloff = 0
 vim.opt.sidescrolloff = 8
 
 vim.opt.updatetime = 100 -- faster completion (4000ms default)
+
+vim.opt.cursorcolumn = true
+vim.opt.cursorline = true
+
+vim.opt.splitright = true -- vertical split to the right
