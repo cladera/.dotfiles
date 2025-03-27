@@ -1,0 +1,8 @@
+theme = catppuccin-frappe
+
+macos-titlebar-style = hidden 
+window-padding-x = 12 
+window-padding-y = 12 
+
+keybind = cmd+shift+enter=new_split:down
+
