@@ -58,29 +58,29 @@ M.setup = function()
     end,
   })
 
-  local default_diagnostic_config = {
-    signs = {
-      active = true,
-      values = {
-        { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-        { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
-        { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
-        { name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
-      },
-    },
-    virtual_text = false,
-    update_in_insert = false,
-    underline = true,
-    severity_sort = true,
+  -- Configure diagnostic display with custom signs
+  vim.diagnostic.config({
     float = {
       focusable = true,
       style = "minimal",
       border = "rounded",
-      source = "always",
+      source = true, -- Show source in diagnostic popup window
       header = "",
       prefix = "",
     },
-  }
-  vim.diagnostic.config(default_diagnostic_config)
+    virtual_text = false,
+    virtual_lines = false,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error.." ",
+        [vim.diagnostic.severity.WARN] = icons.diagnostics.Warning.." ",
+        [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint.." ",
+        [vim.diagnostic.severity.INFO] = icons.diagnostics.Information.." ",
+      },
+    },
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+  })
 end
 return M
