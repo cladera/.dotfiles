@@ -1,8 +1,14 @@
 theme = catppuccin-frappe
 
-macos-titlebar-style = hidden 
+
+window-title-font-family = "Hack Nerd Font"
+
+macos-titlebar-style = tabs 
+
 window-padding-x = 12 
 window-padding-y = 12 
 
 keybind = cmd+shift+enter=new_split:down
+
+macos-option-as-alt = false
 
