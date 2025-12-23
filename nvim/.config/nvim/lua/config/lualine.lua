@@ -28,23 +28,32 @@ local components = {
 			end
 
 			local buf_client_names = {}
+      local seen = {}
 			local copilot_active = false
 
 			-- add client
 			for _, client in pairs(buf_clients) do
+        local name_to_add = nil
+
 				if icons.lsp[client.name] then
-					table.insert(buf_client_names, icons.lsp[client.name])
-				elseif client.name ~= "null-ls" and client.name ~= "GitHub Copilot" then
-					table.insert(buf_client_names, client.name)
+          name_to_add = icons.lsp[client.name]
+				elseif client.name ~= "null-ls" and client.name ~= "copilot" then
+          name_to_add = client.name
 				end
 
-				if client.name == "GitHub Copilot" then
+        -- Only add if not seen before
+        if name_to_add and not seen[name_to_add] then
+          table.insert(buf_client_names, name_to_add)
+          seen[name_to_add] = true
+        end
+
+				if client.name == "copilot" then
 					copilot_active = true
 				end
 			end
 
-			local unique_client_names = table.concat(buf_client_names, ", ")
-			local language_servers = string.format("[%s]", unique_client_names)
+			local unique_client_names = table.concat(buf_client_names, " ")
+			local language_servers = string.format("%%#SLLanguageServer# %s %%*", unique_client_names)
 
 			if copilot_active then
 				language_servers = language_servers .. "%#SLCopilot#" .. " " .. icons.misc.Copilot .. "%*"
@@ -73,7 +82,18 @@ function M.setup()
 				components.mode,
 			},
 			lualine_b = { "branch" },
-			lualine_c = { { "filename", path = 1, icon = icons.kind.Folder } },
+			lualine_c = { 
+        { "filename", path = 1, icon = icons.kind.Folder },
+        {
+          function()
+            if vim.bo.modified then
+              return icons.ui.CircleSmall
+            end
+            return ""
+          end,
+          color = {fg = "#ff6b6b"}
+        }
+      },
 			lualine_x = {
 				"diagnostis",
 				components.lsp,
