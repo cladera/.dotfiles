@@ -1,6 +1,6 @@
 return {
-	-- Treesitter
 	{
+	-- Treesitter
 		"nvim-treesitter/nvim-treesitter",
 		cmd = {
 			"TSInstall",
@@ -89,23 +89,37 @@ return {
 	},
 
 	-- Formatting
-	{
-		"nvimtools/none-ls.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			require("config.null-ls").setup()
-		end,
-	},
+	-- {
+	-- 	"nvimtools/none-ls.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		require("config.null-ls").setup()
+	-- 	end,
+	-- },
 
 	-- AI
-	{
-		"github/copilot.vim",
-		config = function()
-			require("config.copilot").setup()
-		end,
-	},
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({});
+    end
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function()
+      require("copilot_cmp").setup()
+    end
+  },
+	-- {
+	-- 	"github/copilot.vim",
+	-- 	config = function()
+	-- 		require("config.copilot").setup()
+	-- 	end,
+	-- },
 	-- {
 	-- 	"codota/tabnine-nvim",
 	-- 	build = "./dl_binaries.sh",

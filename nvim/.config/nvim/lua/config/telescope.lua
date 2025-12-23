@@ -68,6 +68,12 @@ function M.setup()
 			find_files = {
 				theme = "dropdown",
 				previewer = false,
+        find_command = {
+          "rg",
+          "--files",
+          "--hidden",
+          "--no-ignore-global"
+        }
 			},
 
 			buffers = {

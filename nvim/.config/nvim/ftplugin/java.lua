@@ -22,7 +22,7 @@ else
 end
 
 -- Find root of project
-local root_markers = {".git/", "mvnw", "gradlew" }
+local root_markers = { ".git/", "mvnw", "gradlew" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
 
 if root_dir == "" then
@@ -37,19 +37,18 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = WORKSPACE_PATH .. project_name
 
 local bundles = {}
-local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
-vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. "packages/java-test/extension/server/*.jar"), "\n"))
-vim.list_extend(
-	bundles,
-	vim.split(
-		vim.fn.glob(mason_path .. "packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
-		"\n"
-	)
-)
+local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages")
+-- java-test Mason package is outdated so I installed it manually.
+-- vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. "packages/java-test/extension/server/*.jar"), "\n"))
+local java_test_glob = home .. "/code/vscode-java-test/server/*.jar"
+vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_glob, 1), "\n"))
+
+local java_debug_adapter_glob = mason_path
+	.. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
+vim.list_extend(bundles, vim.split(vim.fn.glob(java_debug_adapter_glob, 1), "\n"))
 
 local function java_mappings()
 	local k = require("util.keymapping")
-	-- local java_test = require("user.dap.java")
 	local wk_ok, wk = pcall(require, "which-key")
 
 	if wk_ok then
@@ -216,7 +215,8 @@ local config = {
 config["on_attach"] = function(client, bufnr)
 	local _, _ = pcall(vim.lsp.codelens.refresh)
 	-- require("jdtls.setup").add_commands()
-	require("jdtls").setup_dap({ hotcodereplace = "auto" })
+	-- require("jdtls").setup_dap({ hotcodereplace = "auto" })
+	require("jdtls").setup_dap()
 	require("jdtls.dap").setup_dap_main_class_configs()
 	require("config.lsp").on_attach(client, bufnr)
 	java_mappings()
