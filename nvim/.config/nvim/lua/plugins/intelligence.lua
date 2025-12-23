@@ -98,6 +98,14 @@ return {
 	-- 		require("config.null-ls").setup()
 	-- 	end,
 	-- },
+   {
+	"stevearc/conform.nvim",
+	event = { "BufReadPre", "BufNewFile" },
+	config = function()
+      require("config.conform").setup()
+    end
+  },
+
 
 	-- AI
   {
