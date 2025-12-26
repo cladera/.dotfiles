@@ -13,12 +13,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
-			require("nvim-navic").setup({
-				lsp = {
-					auto_attach = true,
-				},
-			})
-			require("breadcrumbs").setup()
+      require("config.breadcrumbs").setup()
 		end,
 	},
 	-- Homescreen
