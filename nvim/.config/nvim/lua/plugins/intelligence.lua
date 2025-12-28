@@ -1,6 +1,6 @@
 return {
 	{
-	-- Treesitter
+		-- Treesitter
 		"nvim-treesitter/nvim-treesitter",
 		cmd = {
 			"TSInstall",
@@ -98,30 +98,29 @@ return {
 	-- 		require("config.null-ls").setup()
 	-- 	end,
 	-- },
-   {
-	"stevearc/conform.nvim",
-	event = { "BufReadPre", "BufNewFile" },
-	config = function()
-      require("config.conform").setup()
-    end
-  },
-
+	{
+		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("config.conform").setup()
+		end,
+	},
 
 	-- AI
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({});
-    end
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    config = function()
-      require("copilot_cmp").setup()
-    end
-  },
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({})
+		end,
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	},
 	-- {
 	-- 	"github/copilot.vim",
 	-- 	config = function()
@@ -136,6 +135,16 @@ return {
 	-- 	end,
 	-- },
 	{
+		"ravitemer/mcphub.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
+		config = function()
+			require("mcphub").setup()
+		end,
+	},
+	{
 		"olimorris/codecompanion.nvim",
 		config = function()
 			require("config.codecompanion").setup()
@@ -144,6 +153,8 @@ return {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-treesitter/nvim-treesitter" },
 			{ "hrsh7th/nvim-cmp" },
+			{ "ravitemer/mcphub.nvim" },
+			{ "ravitemer/codecompanion-history.nvim" },
 		},
 	},
 }
