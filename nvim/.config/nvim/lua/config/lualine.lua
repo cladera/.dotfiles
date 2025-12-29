@@ -28,24 +28,24 @@ local components = {
 			end
 
 			local buf_client_names = {}
-      local seen = {}
+			local seen = {}
 			local copilot_active = false
 
 			-- add client
 			for _, client in pairs(buf_clients) do
-        local name_to_add = nil
+				local name_to_add = nil
 
 				if icons.lsp[client.name] then
-          name_to_add = icons.lsp[client.name]
+					name_to_add = icons.lsp[client.name]
 				elseif client.name ~= "null-ls" and client.name ~= "copilot" then
-          name_to_add = client.name
+					name_to_add = client.name
 				end
 
-        -- Only add if not seen before
-        if name_to_add and not seen[name_to_add] then
-          table.insert(buf_client_names, name_to_add)
-          seen[name_to_add] = true
-        end
+				-- Only add if not seen before
+				if name_to_add and not seen[name_to_add] then
+					table.insert(buf_client_names, name_to_add)
+					seen[name_to_add] = true
+				end
 
 				if client.name == "copilot" then
 					copilot_active = true
@@ -82,18 +82,19 @@ function M.setup()
 				components.mode,
 			},
 			lualine_b = { "branch" },
-			lualine_c = { 
-        { "filename", path = 1, icon = icons.kind.Folder },
-        {
-          function()
-            if vim.bo.modified then
-              return icons.ui.CircleSmall
-            end
-            return ""
-          end,
-          color = {fg = "#ff6b6b"}
-        }
-      },
+			lualine_c = {
+				{
+					"filename",
+					path = 1,
+					icon = icons.kind.Folder,
+					symbols = {
+						modified = icons.ui.FloppyDisk, -- Text to show when the file is modified.
+						readonly = icons.ui.Lock, -- Text to show when the file is non-modifiable or readonly.
+						unnamed = icons.ui.File, -- Text to show for unnamed buffers.
+						newfile = icons.ui.NewFile, -- Text to show for newly created file before first write
+					},
+				},
+			},
 			lualine_x = {
 				"diagnostis",
 				components.lsp,
