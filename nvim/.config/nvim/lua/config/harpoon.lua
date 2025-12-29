@@ -1,5 +1,6 @@
-local M = {}
 local k = require("util.keymapping")
+
+local M = {}
 
 function M.setup()
 	local harpoon_ok, harpoon = pcall(require, "harpoon")
@@ -35,6 +36,39 @@ function M.setup()
 			harpoon:list():select(i)
 		end, { desc = "Go To Harpoon File #" .. i })
 	end
+	-- Workaround for S-F3
+	k.map("n", "<S-F3>", function()
+		harpoon:list():select(3)
+	end, { desc = "Go to Harpoon File #3" })
+
+	local telescope_ok, telescope = pcall(require, "telescope")
+
+	if not telescope_ok then
+		return
+	end
+
+	local conf = require("telescope.config").values
+	local function toggle_telescope(harpoon_files)
+		local file_paths = {}
+		for _, item in ipairs(harpoon_files.items) do
+			table.insert(file_paths, item.value)
+		end
+
+		require("telescope.pickers")
+			.new({}, {
+				prompt_title = "Harpooned Files",
+				finder = require("telescope.finders").new_table({
+					results = file_paths,
+				}),
+				previewer = conf.file_previewer({}),
+				sorter = conf.generic_sorter({}),
+			})
+			:find()
+	end
+
+	k.map("n", "<leader>af", function()
+		toggle_telescope(harpoon:list())
+	end, { desc = "Open harpoon window" })
 end
 
 return M
