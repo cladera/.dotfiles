@@ -1,6 +1,6 @@
 return {
-	-- Treesitter
 	{
+		-- Treesitter
 		"nvim-treesitter/nvim-treesitter",
 		cmd = {
 			"TSInstall",
@@ -89,23 +89,44 @@ return {
 	},
 
 	-- Formatting
+	-- {
+	-- 	"nvimtools/none-ls.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		require("config.null-ls").setup()
+	-- 	end,
+	-- },
 	{
-		"nvimtools/none-ls.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
+		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			require("config.null-ls").setup()
+			require("config.conform").setup()
 		end,
 	},
 
 	-- AI
 	{
-		"github/copilot.vim",
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
 		config = function()
-			require("config.copilot").setup()
+			require("copilot").setup({})
 		end,
 	},
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	},
+	-- {
+	-- 	"github/copilot.vim",
+	-- 	config = function()
+	-- 		require("config.copilot").setup()
+	-- 	end,
+	-- },
 	-- {
 	-- 	"codota/tabnine-nvim",
 	-- 	build = "./dl_binaries.sh",
@@ -113,6 +134,16 @@ return {
 	-- 		require("config.tabnine").setup()
 	-- 	end,
 	-- },
+	{
+		"ravitemer/mcphub.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
+		config = function()
+			require("mcphub").setup()
+		end,
+	},
 	{
 		"olimorris/codecompanion.nvim",
 		config = function()
@@ -122,6 +153,8 @@ return {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-treesitter/nvim-treesitter" },
 			{ "hrsh7th/nvim-cmp" },
+			{ "ravitemer/mcphub.nvim" },
+			{ "ravitemer/codecompanion-history.nvim" },
 		},
 	},
 }

@@ -30,9 +30,8 @@ function M.setup()
 				return kind ~= cmp.lsp.CompletionItemKind.Text
 			end,
 		},
-		-- { name = "copilot" },
+		{ name = "copilot" },
 		{ name = "luasnip" },
-		-- { name = "cmp_tabnine" },
 		{ name = "nvim_lua" },
 		{ name = "path" },
 		{ name = "calc" },
@@ -109,10 +108,10 @@ function M.setup()
 					vim_item.kind_hl_group = "CmpItemKindEmoji"
 				end
 
-				if entry.source.name == "cmp_tabnine" then
-					vim_item.kind = icons.misc.Robot
-					vim_item.kind_hl_group = "CmpItemKindTabnine"
-				end
+        if entry.source.name == "copilot" then
+          vim_item.kind = icons.misc.Copilot
+          vim_item.kind_hl_group = "CmpItemKindCopilot"
+        end
 
 				if entry.source.name == "buffer" then
 					vim_item.kind = icons.kind.File

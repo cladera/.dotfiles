@@ -8,14 +8,24 @@ k.map("i", "jk", "<Esc>")
 k.map("i", "jj", "<Esc>")
 k.map("i", "kk", "<Esc>")
 k.map("n", "<leader>w", k.cmd("w"))
-k.map("n", "<leader>by", k.cmd('let @" = expand("%")'), { desc = "Yank buffer filepath" })
-k.map("n", "<leader>bY", k.cmd('let @* = expand("%")'), { desc = "Yank buffer filepath (clipboard)" })
+k.map("n", "<leader>by", k.cmd('let @" = expand("%:.")'), { desc = "Yank relative buffer filepath" })
+k.map("n", "<leader>bY", k.cmd('let @* = expand("%:.")'), { desc = "Yank relative buffer filepath (clipboard)" })
+k.map("n", "<leader>bz", k.cmd('let @" = expand("%:p")'), { desc = "Yank absolute buffer filepath" })
+k.map("n", "<leader>bZ", k.cmd('let @* = expand("%:p")'), { desc = "Yank absolute buffer filepath (clipboard)" })
+k.map("n", "<leader>bo", k.cmd('let @" = expand("%")'), { desc = "Yank absolute buffer filepath as opened" })
+k.map(
+	"n",
+	"<leader>bO",
+	k.cmd('let @* = expand("%")'),
+	{ desc = "Yank absolute buffer filepath as opened (clipboard)" }
+)
 
 -- Windows
 k.map("n", "<C-l>", "<C-w>l")
 k.map("n", "<C-h>", "<C-w>h")
 k.map("n", "<C-k>", "<C-w>k")
 k.map("n", "<C-j>", "<C-w>j")
+
 k.map("n", "<M-Left>", k.cmd("vertical resize-2"))
 k.map("n", "<M-Right>", k.cmd("vertical resize+2"))
 k.map("n", "<M-Up>", k.cmd("horizontal resize-2"))
@@ -40,4 +50,3 @@ k.map("v", ">", ">gv")
 
 -- Yank to system clipboard
 k.map("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
-

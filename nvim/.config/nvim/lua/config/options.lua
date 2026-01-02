@@ -24,3 +24,8 @@ vim.opt.cursorcolumn = true
 vim.opt.cursorline = true
 
 vim.opt.splitright = true -- vertical split to the right
+
+vim.opt.modified = true
+vim.opt.title = true
+
+vim.opt.titlestring = " %{fnamemodify(getcwd(), ':h:t')}/%{fnamemodify(getcwd(), ':t')} (%t)%{&modified ? ' 󰉉 ' : ''}"

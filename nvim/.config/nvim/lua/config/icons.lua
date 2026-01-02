@@ -83,6 +83,7 @@ return {
 		ChevronShortRight = "",
 		ChevronShortUp = "",
 		Circle = " ",
+		CircleSmall = "",
 		Close = "󰅖",
 		CloudDownload = " ",
 		Code = "",
@@ -100,6 +101,7 @@ return {
 		FindFile = "󰈞",
 		FindText = "󰊄",
 		Fire = "",
+    FloppyDisk = "󰉉 ",
 		Folder = "󰉋 ",
 		FolderOpen = " ",
 		FolderSymlink = " ",
@@ -154,7 +156,7 @@ return {
 		Smiley = " ",
 		Package = " ",
 		CircuitBoard = " ",
-    Copilot = " "
+		Copilot = " ",
 	},
 	debug = {
 		Pause = " ",
@@ -166,9 +168,13 @@ return {
 		RunLast = " ",
 		Terminate = " ",
 	},
-  lsp = {
-    lua_ls = "",
-    ts_ls = "",
-    jdtls = ""
-  }
+	lsp = {
+		lua_ls = "",
+		stylua = "",
+		ts_ls = "",
+		jdtls = "",
+		eslint = "󰱺",
+		terraformls = "",
+		angularls = "󰚿",
+	},
 }

@@ -1,5 +1,7 @@
 local icons = require("config.icons")
 local k = require("util.keymapping")
+local repo = require("util.repo")
+local code = require("util.code")
 
 local function setup_ui()
 	local dapui_ok, dapui = pcall(require, "dapui")
@@ -84,6 +86,57 @@ local function setup_ui()
 	end
 end
 
+local function load_adapters(adapters)
+  local mason_path = vim.fn.stdpath("data") .. "/mason/"
+
+  -- js-debug-adapter
+  local js_debugger_path = mason_path .. "packages/js-debug-adapter/"
+  adapters["pwa-node"] = {
+    type = "server",
+    host = "localhost",
+    port = "${port}",
+    executable = {
+      command = "node",
+      args = { js_debugger_path .. "js-debug/src/dapDebugServer.js", "${port}" },
+    },
+  }
+  adapters["node"] = adapters["pwa-node"]
+
+  -- Chrome
+  local chrome_executable_path = mason_path .. "packages/chrome-debug-adapter/out/src/chromeDebug.js"
+  adapters["pwa-chrome"] = {
+    type = "executable",
+    command = "node",
+    args = {
+      chrome_executable_path
+    }
+  }
+  adapters["chrome"] = adapters["pwa-chrome"]
+end
+
+local function load_configurations(configurations)
+  local config_paths = {
+    vim.fn.expand("~/.local/nvim/dap.lua"), -- Load workstation config first
+    vim.fn.getcwd() .. "/.nvim/dap.lua" -- Then project config 
+  }
+  local utils = {
+    repo,
+    code
+  }
+
+  for _, config_path in ipairs(config_paths) do
+    if vim.fn.filereadable(config_path) == 1 then
+      local ok, config = pcall(dofile, config_path)
+      if ok and type(config) == "table" and type(config.setup) == "function" then
+        local success, err = pcall(config.setup, configurations, utils)
+        if not success then
+          vim.notify("Error loading DAP config from " .. config_path .. ": " .. tostring(err), vim.log.levels.ERROR)
+        end
+      end
+    end
+  end
+end
+
 local M = {}
 
 function M.setup()
@@ -149,6 +202,10 @@ function M.setup()
 	k.map("n", "<leader>dU", k.cmd("lua require'dapui'.toggle({reset = true})"), { desc = "Toggle UI" })
 
 	setup_ui()
+
+  load_adapters(dap.adapters)
+
+  load_configurations(dap.configurations)
 end
 
 return M

@@ -9,10 +9,4 @@ return {
 			"nvim-neotest/nvim-nio",
 		},
 	},
-	{
-		"mxsdev/nvim-dap-vscode-js",
-		config = function()
-			require("config.dap.vscode-js").setup()
-		end,
-	},
 }

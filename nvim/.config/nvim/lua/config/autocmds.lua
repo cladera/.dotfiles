@@ -27,3 +27,11 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   end,
 })
 
+-- Buffer modification indicators
+vim.api.nvim_create_autocmd({"BufModifiedSet"}, {
+  callback = function()
+    -- Update window title whhen buffer modification status changes
+    vim.opt.titlestring = " %{fnamemodify(getcwd(), ':h:t')}/%{fnamemodify(getcwd(), ':t')} (%t)%{&modified ? ' 󰉉 ' : ''}"
+  end,
+});
+
