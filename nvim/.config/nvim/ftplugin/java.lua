@@ -7,7 +7,14 @@ if not status then
 	return
 end
 
-local capabilities = require("config.lsp").common_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.signatureHelp = {
+	dynamicRegistration = false,
+	signatureInformation = {
+		documentationFormat = { "markdown", "plaintext" },
+		parameterInformation = { labelOffsetSupport = true },
+	},
+}
 
 -- Determine OS
 local home = os.getenv("HOME")
@@ -154,11 +161,6 @@ local config = {
 			references = {
 				includeDecompiledSources = true,
 			},
-			inlayHints = {
-				parameterNames = {
-					enabled = "all", -- literals, all, none
-				},
-			},
 			format = {
 				enabled = true,
 				settings = {
@@ -166,33 +168,49 @@ local config = {
 					profile = "TwilioStyle",
 				},
 			},
-		},
-		signatureHelp = { enabled = true },
-		completion = {
-			favoriteStaticMembers = {
-				"org.hamcrest.MatcherAssert.assertThat",
-				"org.hamcrest.Matchers.*",
-				"org.hamcrest.CoreMatchers.*",
-				"org.junit.jupiter.api.Assertions.*",
-				"java.util.Objects.requireNonNull",
-				"java.util.Objects.requireNonNullElse",
-				"org.mockito.Mockito.*",
+			inlayHints = {
+				parameterTypes = {
+					enabled = true,
+				},
+				variableTypes = {
+					enabled = true,
+				},
+				parameterNames = {
+					enabled = "all",
+				},
+			},
+			signatureHelp = {
+				enabled = true,
+				description = {
+					enabled = true,
+				},
+			},
+			completion = {
+				favoriteStaticMembers = {
+					"org.hamcrest.MatcherAssert.assertThat",
+					"org.hamcrest.Matchers.*",
+					"org.hamcrest.CoreMatchers.*",
+					"org.junit.jupiter.api.Assertions.*",
+					"java.util.Objects.requireNonNull",
+					"java.util.Objects.requireNonNullElse",
+					"org.mockito.Mockito.*",
+				},
+			},
+			contentProvider = { preferred = "fernflower" },
+			codeGeneration = {
+				toString = {
+					template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+				},
+				useBlocks = true,
+			},
+			sources = {
+				organizeImports = {
+					starThreshold = 9999,
+					staticStarThreshold = 9999,
+				},
 			},
 		},
-		contentProvider = { preferred = "fernflower" },
 		extendedClientCapabilities = extendedClientCapabilities,
-		sources = {
-			organizeImports = {
-				starThreshold = 9999,
-				staticStarThreshold = 9999,
-			},
-		},
-		codeGeneration = {
-			toString = {
-				template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
-			},
-			useBlocks = true,
-		},
 	},
 
 	flags = {
@@ -214,12 +232,12 @@ local config = {
 
 config["on_attach"] = function(client, bufnr)
 	local _, _ = pcall(vim.lsp.codelens.refresh)
-	-- require("jdtls.setup").add_commands()
-	-- require("jdtls").setup_dap({ hotcodereplace = "auto" })
 	require("jdtls").setup_dap()
 	require("jdtls.dap").setup_dap_main_class_configs()
-	require("config.lsp").on_attach(client, bufnr)
 	java_mappings()
+	if client.supports_method("textDocument/inlayHint") then
+		vim.lsp.inlay_hint.enable(true)
+	end
 end
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
