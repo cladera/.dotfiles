@@ -176,5 +176,6 @@ return {
 		eslint = "󰱺",
 		terraformls = "",
 		angularls = "󰚿",
+    tailwindcss = "󱏿"
 	},
 }
