@@ -43,17 +43,6 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
 local workspace_dir = WORKSPACE_PATH .. project_name
 
-local bundles = {}
-local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/packages")
--- java-test Mason package is outdated so I installed it manually.
--- vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. "packages/java-test/extension/server/*.jar"), "\n"))
-local java_test_glob = home .. "/code/vscode-java-test/server/*.jar"
-vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_glob, 1), "\n"))
-
-local java_debug_adapter_glob = mason_path
-	.. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
-vim.list_extend(bundles, vim.split(vim.fn.glob(java_debug_adapter_glob, 1), "\n"))
-
 local function java_mappings()
 	local k = require("util.keymapping")
 	local wk_ok, wk = pcall(require, "which-key")
@@ -216,18 +205,21 @@ local config = {
 	flags = {
 		allow_incremental_sync = true,
 	},
+}
 
-	-- Language server `initializationOptions`
-	-- You need to extend the `bundles` with paths to jar files
-	-- if you want to use additional eclipse.jdt.ls plugins.
-	--
-	-- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
-	--
-	-- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
-	init_options = {
-		-- bundles = {},
-		bundles = bundles,
-	},
+-- DAP
+-- Language server `initializationOptions`
+-- You need to extend the `bundles` with paths to jar files
+-- if you want to use additional eclipse.jdt.ls plugins.
+--
+-- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
+--
+-- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
+local bundles = {}
+vim.list_extend(bundles, vim.fn.globpath("$MASON/share/java-debug-adapter", "*.jar", true, true))
+vim.list_extend(bundles, vim.fn.globpath("$MASON/share/java-test", "*.jar", true, true))
+config["init_options"] = {
+	bundles = bundles,
 }
 
 config["on_attach"] = function(client, bufnr)
