@@ -37,6 +37,9 @@ function M.setup()
 			-- TOML
 			toml = { "taplo" },
 
+			-- Java
+			java = { "google-java-format" },
+
 			-- Use the "*" filetype to run formatters on all filetypes
 			["*"] = { "trim_whitespace" },
 		},
