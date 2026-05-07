@@ -26,10 +26,10 @@ k.map("n", "<C-h>", "<C-w>h")
 k.map("n", "<C-k>", "<C-w>k")
 k.map("n", "<C-j>", "<C-w>j")
 
-k.map("n", "<M-Left>", k.cmd("vertical resize-2"))
-k.map("n", "<M-Right>", k.cmd("vertical resize+2"))
-k.map("n", "<M-Up>", k.cmd("horizontal resize-2"))
-k.map("n", "<M-Down>", k.cmd("horizontal resize+2"))
+k.map("n", "<M-b>", k.cmd("vertical resize-2"), { desc = "Decrease window width"})
+k.map("n", "<M-f>", k.cmd("vertical resize+2"), { desc = "Increase window width"})
+k.map("n", "<M-Up>", k.cmd("horizontal resize-2"), { desc = "Decrease window height"})
+k.map("n", "<M-Down>", k.cmd("horizontal resize+2"), { desc = "Increase window height"})
 
 -- Tabs
 k.map("n", "<C-M-l>", k.cmd("+tabnext"), { desc = "Next Tab" })
