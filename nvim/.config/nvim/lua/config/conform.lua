@@ -66,7 +66,7 @@ function M.setup()
 		conform.format({
 			lsp_format = "fallback",
 			async = false,
-			timeout_ms = 500,
+			timeout_ms = 10000,
 		})
 	end, { desc = "Format file or range (in visual mode)" })
 end
