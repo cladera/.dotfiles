@@ -40,6 +40,8 @@ function M.setup()
 			-- Java
 			java = { "google-java-format" },
 
+			terraform = { "terraform_fmt" },
+
 			-- Use the "*" filetype to run formatters on all filetypes
 			["*"] = { "trim_whitespace" },
 		},
