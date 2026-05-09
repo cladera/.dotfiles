@@ -57,6 +57,20 @@ automatically-unhide-macos-hidden-apps = false
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 
+# Workspace to monitor assignment
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+  '1' = 'main'
+  '2' = 'main'
+  '3' = 'main'
+  '4' = 'main'
+  '5' = 'main'
+  '6' = 'main'
+  '7' = 'secondary'
+  '8' = 'secondary'
+  '9' = 'secondary'
+  '0' = 'secondary'
+
 [gaps]
   inner.horizontal = 8
   inner.vertical =   8
@@ -210,3 +224,4 @@ automatically-unhide-macos-hidden-apps = false
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
+

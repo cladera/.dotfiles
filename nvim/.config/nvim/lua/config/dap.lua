@@ -120,8 +120,8 @@ local function load_configurations(configurations)
     vim.fn.getcwd() .. "/.nvim/dap.lua" -- Then project config 
   }
   local utils = {
-    repo,
-    code
+    repo = repo,
+    code = code
   }
 
   for _, config_path in ipairs(config_paths) do

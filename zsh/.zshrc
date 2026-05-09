@@ -1,7 +1,7 @@
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 
 export PATH=$HOME/.config/bin:$PATH
-export PATH=$PATH:/opt/homebrew/bin
+export PATH=/opt/homebrew/bin:$PATH
 
 # Plugins
 plug "zap-zsh/supercharge"
@@ -37,8 +37,8 @@ if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
     export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
     export GIT_EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
 else
-    export VISUAL="lvim"
-    export EDITOR="lvim"
+    export VISUAL="nvim"
+    export EDITOR="nvim"
 fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -49,13 +49,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Pyenv
-# eval "$(pyenv init -)"
-
 # Zoxide
 eval "$(zoxide init zsh)"
-
-# . "$HOME/.asdf/asdf.sh"
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

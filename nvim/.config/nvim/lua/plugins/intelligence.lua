@@ -11,6 +11,7 @@ return {
 			"TSInstallSync",
 			"TSInstallFromGrammar",
 		},
+    branch = 'main',
 		event = "BufRead",
 		config = function()
 			require("config.treesitter").setup()
@@ -135,7 +136,7 @@ return {
 	-- 	end,
 	-- },
 	{
-		"ravitemer/mcphub.nvim",
+		"bahaaza/mcphub.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
@@ -151,9 +152,9 @@ return {
 		end,
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-treesitter/nvim-treesitter" },
+			-- { "nvim-treesitter/nvim-treesitter" },
 			{ "hrsh7th/nvim-cmp" },
-			{ "ravitemer/mcphub.nvim" },
+			{ "bahaaza/mcphub.nvim" },
 			{ "ravitemer/codecompanion-history.nvim" },
 		},
 	},
